@@ -1,0 +1,27 @@
+.overlay {
+  position:fixed; inset:0; z-index:9997;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  animation:fadeIn 0.2s ease;
+}
+.card {
+  background:var(--bg-2); border-radius:var(--radius-xl);
+  padding:3rem 4rem; text-align:center;
+  box-shadow:0 32px 80px rgba(0,0,0,0.3);
+  animation:scaleIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+  border:1px solid rgba(108,99,255,0.2);
+}
+.label { font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--text-3); }
+.number {
+  font-family:var(--font-display); font-size:6rem; font-weight:700; line-height:1;
+  background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:numPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  filter:drop-shadow(0 0 30px rgba(108,99,255,0.4));
+}
+.go { font-size:4.5rem; background:var(--grad-green); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; --grad-green:linear-gradient(135deg,#10B981,#34D399); }
+@keyframes numPop { from{transform:scale(0.5);opacity:0} to{transform:scale(1);opacity:1} }
+
+.dots { display:flex; gap:0.5rem; }
+.dot { width:10px; height:10px; border-radius:50%; background:var(--bg-4); transition:all 0.3s ease; }
+.dotActive { background:var(--brand); transform:scale(1.3); }

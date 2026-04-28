@@ -1,0 +1,13 @@
+{
+  "name": "Gamero",
+  "short_name": "Gamero",
+  "description": "Multiplayer party games with friends",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F8FC",
+  "theme_color": "#6C63FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

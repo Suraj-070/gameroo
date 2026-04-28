@@ -1,0 +1,94 @@
+.page { min-height:100vh; background:#F0F1F7; display:flex; flex-direction:column; }
+.roundBar { background:#fff; border-bottom:1px solid var(--border); padding:0.5rem 1.5rem; font-size:0.8rem; color:#9CA3AF; text-align:center; }
+.roundBar strong { color:var(--brand); }
+.center { flex:1; max-width:580px; width:100%; margin:0 auto; padding:1.5rem 1rem 5rem; display:flex; flex-direction:column; gap:1.125rem; }
+
+.card { background:#fff; border:1px solid rgba(108,99,255,0.12); border-radius:var(--radius-xl); padding:1.75rem; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--grad-brand); }
+.cardIcon { font-size:2rem; text-align:center; display:block; margin-bottom:0.5rem; }
+.cardTitle { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:#111827; text-align:center; margin-bottom:0.35rem; }
+.cardSub { font-size:0.82rem; color:#9CA3AF; text-align:center; margin-bottom:1.25rem; line-height:1.5; }
+
+.statementsForm { display:flex; flex-direction:column; gap:0.625rem; }
+.statementRow { display:flex; align-items:center; gap:0.625rem; border:1.5px solid #E5E7EB; border-radius:var(--radius); padding:0.375rem; background:var(--bg-3); transition:var(--transition); }
+.lieRow { border-color:rgba(239,68,68,0.4); background:#FFF5F5; }
+.lieToggle { width:34px; height:34px; border-radius:8px; border:1px solid #E5E7EB; background:#fff; cursor:pointer; font-size:1rem; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:var(--transition); }
+.lieActive { background:rgba(239,68,68,0.15); border-color:rgba(239,68,68,0.3); }
+.statementInput { flex:1; background:transparent; border:none; outline:none; font-family:var(--font-body); font-size:0.875rem; color:#111827; padding:0.25rem 0.375rem; }
+.lieHint { font-size:0.72rem; color:#9CA3AF; text-align:center; }
+.primaryBtn { padding:0.875rem; background:var(--grad-brand); color:#fff; border:none; border-radius:var(--radius); font-family:var(--font-display); font-size:0.95rem; font-weight:700; cursor:pointer; transition:var(--transition); margin-top:0.25rem; box-shadow:var(--shadow-brand); }
+.primaryBtn:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(108,99,255,0.4); }
+
+.lockedIn { text-align:center; font-size:0.875rem; color:#10B981; font-weight:700; display:flex; flex-direction:column; gap:0.75rem; align-items:center; }
+.submittedList { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; }
+.submittedChip { font-size:0.75rem; padding:3px 10px; border-radius:999px; background:var(--bg-3); border:1px solid #E5E7EB; color:#9CA3AF; }
+.doneChip { background:rgba(16,185,129,0.15); border-color:#10B981; color:#065F46; }
+
+.voteHeader { display:flex; align-items:center; gap:0.875rem; margin-bottom:1.25rem; }
+.voteAvatar { width:44px; height:44px; border-radius:50%; background:var(--grad-brand); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:1.1rem; flex-shrink:0; }
+.voteName { font-family:var(--font-display); font-size:1rem; font-weight:700; color:#111827; }
+.voteSub  { font-size:0.78rem; color:#9CA3AF; }
+.ownTurn  { text-align:center; color:#9CA3AF; font-size:0.875rem; display:flex; flex-direction:column; gap:0.75rem; align-items:center; }
+
+.voteOptions { display:flex; flex-direction:column; gap:0.625rem; }
+.voteBtn { display:flex; align-items:center; gap:0.75rem; padding:0.875rem 1rem; background:var(--bg-3); border:1.5px solid #E5E7EB; border-radius:var(--radius); cursor:pointer; text-align:left; transition:var(--transition); font-family:var(--font-body); }
+.voteBtn:hover:not(:disabled) { border-color:var(--brand); background:rgba(108,99,255,0.15); transform:translateY(-1px); }
+.voteBtn:disabled { cursor:default; }
+.votedBtn { opacity:0.8; }
+.voteNum { width:28px; height:28px; border-radius:50%; background:#fff; border:1px solid #E5E7EB; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:0.78rem; font-weight:700; flex-shrink:0; }
+.voteText { flex:1; font-size:0.875rem; color:#111827; font-weight:500; }
+.myVoteMark { font-size:0.7rem; color:var(--brand); font-weight:700; }
+.waitVote { text-align:center; font-size:0.78rem; color:#9CA3AF; }
+
+.revealHeader { display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem; }
+.revealIcon  { font-size:1.75rem; }
+.revealTitle { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:#111827; }
+.revealStatements { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; }
+.revealStatement { display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1rem; border-radius:var(--radius); border:1.5px solid; animation:slideUp 0.3s ease both; }
+.isLie   { border-color:rgba(239,68,68,0.3); background:#FEF2F2; }
+.isTruth { border-color:rgba(16,185,129,0.3); background:#F0FFF4; }
+.revealMark { font-size:1rem; flex-shrink:0; }
+.revealText { flex:1; font-size:0.875rem; color:#111827; font-weight:500; }
+.lieBadge { font-size:0.62rem; font-weight:700; background:#EF4444; color:#fff; padding:2px 7px; border-radius:999px; flex-shrink:0; font-family:var(--font-display); }
+
+.voteResults { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.875rem; }
+.voteResult  { display:flex; align-items:center; justify-content:space-between; padding:0.5rem 0.75rem; border-radius:8px; font-size:0.82rem; font-weight:600; }
+.correct { background:rgba(16,185,129,0.15); color:#065F46; }
+.wrong   { background:rgba(239,68,68,0.15); color:#991B1B; }
+.voteResultName { font-weight:700; }
+.revealSub { text-align:center; font-size:0.72rem; color:#9CA3AF; }
+
+.scoreStrip { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.scoreChip { display:flex; align-items:center; gap:0.4rem; padding:0.4rem 0.875rem; background:#fff; border:1px solid #E5E7EB; border-radius:999px; font-size:0.78rem; }
+.myChip { border-color:var(--brand); background:rgba(108,99,255,0.15); }
+.chipName { font-weight:600; color:#111827; }
+.chipScore { color:var(--brand); font-weight:700; font-family:var(--font-display); }
+
+.overWrap { flex:1; display:flex; align-items:center; justify-content:center; padding:2rem 1rem; }
+.overCard { background:#fff; border:1px solid rgba(108,99,255,0.12); border-radius:var(--radius-xl); padding:2rem; max-width:400px; width:100%; text-align:center; box-shadow:var(--shadow-lg); display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.overEmoji { font-size:3rem; }
+.overTitle { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:#111827; }
+.overSub   { font-size:0.72rem; color:#9CA3AF; }
+.scoreList { width:100%; display:flex; flex-direction:column; gap:0.5rem; }
+.scoreRow  { display:flex; align-items:center; gap:0.75rem; padding:0.6rem 0.875rem; background:var(--bg-3); border-radius:var(--radius); }
+.scoreRank { font-size:1rem; flex-shrink:0; }
+.scoreName { flex:1; font-weight:700; font-size:0.875rem; color:#111827; text-align:left; }
+.scoreNum  { font-family:var(--font-display); font-weight:700; color:var(--brand); }
+.youBadge  { font-size:0.6rem; background:var(--brand); color:#fff; padding:1px 5px; border-radius:999px; margin-left:4px; vertical-align:middle; font-family:var(--font-display); }
+
+.leaveBtn { position:fixed; bottom:1.25rem; right:1.25rem; padding:0.6rem 1rem; background:#fff; border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius); color:#EF4444; font-size:0.8rem; cursor:pointer; font-family:var(--font-body); font-weight:600; box-shadow:var(--shadow); transition:var(--transition); }
+.leaveBtn:hover { background:var(--red-light); }
+
+/* ── Statement role labels (Truth/Lie badges) ── */
+.roleLie   { font-size: 0.6rem; font-weight: 800; color: #ec4899; letter-spacing: 0.05em; }
+.roleTruth { font-size: 0.6rem; font-weight: 800; color: #10B981; letter-spacing: 0.05em; }
+
+/* ── Lie reveal animation ── */
+.lieAnimated {
+  animation: lieReveal 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes lieReveal {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.04); box-shadow: 0 0 0 6px rgba(236,72,153,0.2); }
+  100% { transform: scale(1); }
+}

@@ -1,0 +1,45 @@
+.page { min-height:100vh; background:#0f0d1a; display:flex; align-items:center; justify-content:center; padding:2rem 1rem; position:relative; overflow:hidden; }
+.meshBg {
+  position:fixed; inset:0; pointer-events:none;
+  background:
+    linear-gradient(135deg, #05010f 0%, #130536 35%, #2d1b69 55%, #0e1a5e 75%, #05010f 100%);
+  background-size:300% 300%; animation:gradShift 14s ease infinite;
+}
+@keyframes gradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+.meshBg::after {
+  content:''; position:fixed; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(139,92,246,0.35) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 60% at 85% 80%, rgba(236,72,153,0.3) 0%, transparent 52%);
+}
+
+.center { position:relative; z-index:1; max-width:480px; width:100%; display:flex; flex-direction:column; align-items:center; gap:1.75rem; }
+
+.header { text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
+.trophyWrap { position:relative; }
+.trophy { font-size:4rem; display:block; animation:float 3s ease-in-out infinite; }
+.trophyGlow { position:absolute; inset:-10px; border-radius:50%; background:radial-gradient(circle, rgba(108,99,255,0.2) 0%, transparent 70%); pointer-events:none; }
+.title { font-family:var(--font-display); font-size:2rem; font-weight:700; background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sub   { font-size:0.875rem; color:rgba(255,255,255,0.4); }
+
+.podium { width:100%; display:flex; flex-direction:column; gap:0.625rem; }
+.podiumItem {
+  display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem;
+  background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); backdrop-filter:blur(12px);
+  box-shadow:var(--shadow-sm); animation:slideUp 0.4s ease both;
+  transition:var(--transition);
+}
+.mine { border-color:var(--brand); background:rgba(108,99,255,0.18); box-shadow:0 0 0 3px rgba(108,99,255,0.1), var(--shadow-sm); }
+.podiumRank { font-size:1.5rem; width:36px; flex-shrink:0; text-align:center; }
+.podiumAvatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; color:#fff; font-size:1rem; flex-shrink:0; }
+.podiumName { flex:1; font-family:var(--font-display); font-size:1rem; font-weight:700; color:rgba(255,255,255,0.92); }
+.youTag { font-size:0.62rem; background:var(--brand); color:#fff; padding:1px 6px; border-radius:999px; margin-left:4px; vertical-align:middle; }
+.podiumScore { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--brand); }
+
+.actions { display:flex; gap:0.75rem; width:100%; }
+.btnPrimary { flex:1; padding:0.9rem; background:var(--grad-brand); color:#fff; border:none; border-radius:var(--radius); font-family:var(--font-display); font-size:0.95rem; font-weight:700; cursor:pointer; transition:var(--transition); box-shadow:var(--shadow-brand); }
+.btnPrimary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(108,99,255,0.4); }
+.btnSecondary { flex:1; padding:0.9rem; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.92); border:1.5px solid var(--border); border-radius:var(--radius); font-family:var(--font-display); font-size:0.95rem; font-weight:600; cursor:pointer; transition:var(--transition); }
+.btnSecondary:hover { border-color:rgba(196,181,253,0.4); color:#c4b5fd; background:rgba(139,92,246,0.15); }
+
+.shareRow { display:flex; justify-content:center; width:100%; }

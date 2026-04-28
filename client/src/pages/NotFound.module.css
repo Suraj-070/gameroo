@@ -1,0 +1,32 @@
+.page { min-height:100vh; background:var(--bg); display:flex; align-items:center; justify-content:center; padding:2rem; position:relative; overflow:hidden; }
+.meshBg { position:fixed; inset:0; pointer-events:none; background: radial-gradient(ellipse 60% 50% at 30% 30%, rgba(108,99,255,0.1) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 70% 70%, rgba(236,72,153,0.07) 0%, transparent 60%); }
+.center { position:relative; z-index:1; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.25rem; }
+
+.glitch {
+  font-family:var(--font-display); font-size:clamp(5rem,20vw,9rem); font-weight:700; line-height:1;
+  background:var(--grad-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  position:relative; filter:drop-shadow(0 0 40px rgba(108,99,255,0.3));
+  animation:glitchAnim 4s infinite;
+}
+.glitch::before, .glitch::after {
+  content:attr(data-text); position:absolute; top:0; left:0; width:100%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.glitch::before { background:linear-gradient(135deg,#ec4899,#f97316); clip-path:inset(0 0 60% 0); animation:glitch1 4s infinite; opacity:0.6; }
+.glitch::after  { background:linear-gradient(135deg,#00D4FF,#6C63FF); clip-path:inset(60% 0 0 0); animation:glitch2 4s infinite; opacity:0.6; }
+@keyframes glitchAnim { 0%,95%,100%{transform:none} 96%{transform:skew(-1deg)} 97%{transform:skew(1deg)} }
+@keyframes glitch1    { 0%,90%,100%{transform:none;opacity:0} 91%{transform:translate(-3px,2px);opacity:0.7} 93%{transform:translate(3px,-2px);opacity:0.7} 95%{transform:none;opacity:0} }
+@keyframes glitch2    { 0%,90%,100%{transform:none;opacity:0} 92%{transform:translate(3px,2px);opacity:0.7} 94%{transform:translate(-3px,-2px);opacity:0.7} 95%{transform:none;opacity:0} }
+
+.title { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--text); }
+.sub   { font-size:0.875rem; color:var(--text-3); max-width:280px; line-height:1.5; }
+
+.games { display:flex; gap:0.75rem; }
+.gameIcon { font-size:1.5rem; animation:float 3s ease-in-out infinite; display:block; }
+
+.btn {
+  padding:0.875rem 2rem; background:var(--grad-brand); color:#fff; border:none;
+  border-radius:var(--radius); font-family:var(--font-display); font-size:0.95rem;
+  font-weight:700; cursor:pointer; transition:var(--transition); box-shadow:var(--shadow-brand);
+}
+.btn:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(108,99,255,0.4); }

@@ -1,0 +1,374 @@
+/* ═══════════════════════════════════════════════════
+   Number Guessing — Bright indigo-navy theme
+   Same palette as Word Wordle for consistency
+═══════════════════════════════════════════════════ */
+
+/* ── PAGE ── */
+.page {
+  min-height: 100vh;
+  background: #1a1a2e;
+  display: flex; flex-direction: column; position: relative;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.page::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 0%,   rgba(139,92,246,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 100%, rgba(236,72,153,0.14) 0%, transparent 55%),
+    linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+.page > * { position: relative; z-index: 1; }
+
+/* ── TOPBAR ── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26,26,46,0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: sticky; top: 0; z-index: 10;
+}
+.backBtn { background: none; border: none; color: #a78bfa; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit; padding: 0; transition: color 0.15s; }
+.backBtn:hover { color: #c4b5fd; }
+.topTitle { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.topRoom  { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+.topRoom strong { color: #a78bfa; font-weight: 700; }
+
+/* ── TURN BANNER ── */
+.turnBanner {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.875rem 1.5rem; font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 700; margin: 1rem 1.25rem 0;
+  border-radius: 14px; border: 2px solid; transition: all 0.3s ease;
+}
+.myTurnBanner {
+  background: rgba(124,58,237,0.22);
+  border-color: #7c3aed; color: #ddd6fe;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.2);
+  animation: bannerPulse 2s ease-in-out infinite;
+}
+.theirTurnBanner {
+  background: rgba(245,158,11,0.18);
+  border-color: rgba(245,158,11,0.6); color: #fde68a;
+}
+@keyframes bannerPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(124,58,237,0.2); }
+  50%     { box-shadow: 0 4px 28px rgba(124,58,237,0.4); }
+}
+.turnIcon { font-size: 1.1rem; }
+
+/* ── FLOATING REACTIONS ── */
+.reactionsFloat {
+  position: fixed; top: 50%; right: 2rem; z-index: 50;
+  display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none;
+  transform: translateY(-50%);
+}
+.reactionPop {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  animation: reactionAnim 2s ease forwards;
+  background: rgba(15,10,40,0.95); border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 14px; padding: 0.5rem 0.75rem;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5); font-size: 1.75rem;
+}
+.reactionFrom { font-size: 0.65rem; color: rgba(255,255,255,0.65); font-weight: 600; }
+@keyframes reactionAnim {
+  0%   { opacity:0; transform:translateY(20px) scale(0.8); }
+  15%  { opacity:1; transform:translateY(0) scale(1.1); }
+  30%  { transform:scale(1); }
+  75%  { opacity:1; }
+  100% { opacity:0; transform:translateY(-30px) scale(0.9); }
+}
+
+/* ── CARDS ROW ── */
+.cardsRow {
+  display: flex; gap: 1rem; padding: 1rem 1.25rem;
+  flex: 1; align-items: flex-start;
+}
+.playerCard {
+  flex: 1; min-width: 0;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.13);
+  border-radius: 20px; padding: 1.25rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.activeCard {
+  border-color: rgba(124,58,237,0.6);
+  background: rgba(109,40,217,0.12);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.12), 0 8px 32px rgba(124,58,237,0.2);
+}
+
+/* Card header */
+.cardHeader    { display: flex; align-items: center; justify-content: space-between; }
+.cardNameRow   { display: flex; align-items: center; gap: 0.5rem; }
+.cardName      { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; }
+.youBadge {
+  font-size: 0.62rem; font-weight: 700;
+  background: linear-gradient(135deg,#7c3aed,#ec4899); color: #fff;
+  padding: 1px 7px; border-radius: 999px; letter-spacing: 0.05em;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.guessCountBadge {
+  font-size: 0.72rem; font-weight: 700;
+  background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.65);
+  padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+  font-family: 'Space Grotesk', sans-serif;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.secretRow { font-size: 0.82rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+
+/* Status bar */
+.statusBar {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.625rem 1rem; border-radius: 10px; border: 1.5px solid;
+  font-size: 0.85rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+}
+.myTurnBar {
+  background: rgba(124,58,237,0.22); border-color: #7c3aed; color: #ddd6fe;
+  animation: bannerPulse 1.8s ease infinite;
+}
+.waitBar { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.5); color: #fde68a; }
+
+/* Spin + pulse */
+.spinIcon  { display: inline-block; animation: spin 2s linear infinite; }
+.pulseIcon { display: inline-block; animation: iconPulse 1.2s ease-in-out infinite; }
+@keyframes spin      { to { transform: rotate(360deg); } }
+@keyframes iconPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+
+/* ── RANGE BAR ── */
+.rangeSection { display: flex; flex-direction: column; gap: 0.4rem; }
+.rangeLabel {
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em;
+  color: #a78bfa; text-transform: uppercase;
+  display: flex; align-items: center; gap: 4px;
+}
+.rangeTrack {
+  height: 9px; background: rgba(255,255,255,0.12); border-radius: 5px;
+  position: relative; overflow: hidden;
+}
+.rangeFill {
+  position: absolute; top: 0; bottom: 0;
+  background: linear-gradient(90deg, #7c3aed, #ec4899);
+  border-radius: 5px;
+  transition: left 0.6s cubic-bezier(0.34,1.56,0.64,1), right 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 0 8px rgba(124,58,237,0.4);
+}
+.rangeNumbers {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.72rem;
+}
+.rangeNumbers span:first-child,
+.rangeNumbers span:last-child { color: rgba(255,255,255,0.6); font-weight: 600; }
+.rangeCenter {
+  font-size: 0.8rem; font-weight: 800; color: #c4b5fd;
+  font-family: 'Space Grotesk', sans-serif;
+  background: rgba(109,40,217,0.2); padding: 1px 10px; border-radius: 999px;
+  border: 1px solid rgba(167,139,250,0.25);
+}
+
+/* ── GUESS LIST ── */
+.guessList {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  max-height: 220px; overflow-y: auto; padding-right: 2px;
+}
+.guessList::-webkit-scrollbar { width: 3px; }
+.guessList::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+.guessChip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0.875rem; border-radius: 10px; border: 1.5px solid;
+  animation: chipIn 0.25s ease; flex-shrink: 0;
+}
+@keyframes chipIn { from{opacity:0;transform:translateY(-6px) scale(0.97)} to{opacity:1;transform:none} }
+.guessChipNum  { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 800; }
+.guessChipHint { font-size: 0.78rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+
+/* Empty state */
+.emptyState { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 1.5rem 1rem; color: rgba(255,255,255,0.3); font-size: 0.82rem; }
+.emptyIcon  { font-size: 1.75rem; opacity: 0.5; animation: floatIcon 2.5s ease-in-out infinite; }
+@keyframes floatIcon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+/* ── SETUP / DIFFICULTY ── */
+.setupWrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.setupCard {
+  width: 100%; max-width: 460px;
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 28px;
+  padding: 2.5rem 2rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  animation: scaleIn 0.3s ease; position: relative; overflow: hidden;
+}
+.setupCard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #7c3aed, #ec4899, #fbbf24);
+}
+@keyframes scaleIn { from{opacity:0;transform:scale(0.96) translateY(8px)} to{opacity:1;transform:scale(1) translateY(0)} }
+.setupEmoji { font-size: 3rem; animation: floatIcon 2.5s ease-in-out infinite; }
+.setupTitle { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; margin: 0; }
+.setupSub   { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.55; margin: 0; }
+
+.setupForm  { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
+.setupInput {
+  width: 100%; padding: 1rem;
+  background: rgba(255,255,255,0.09); border: 2px solid rgba(255,255,255,0.18);
+  border-radius: 14px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.75rem; font-weight: 700; text-align: center;
+  color: #fff; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s; -moz-appearance: textfield;
+}
+.setupInput::-webkit-inner-spin-button, .setupInput::-webkit-outer-spin-button { -webkit-appearance: none; }
+.setupInput:focus { border-color: #a78bfa; background: rgba(124,58,237,0.18); box-shadow: 0 0 0 4px rgba(124,58,237,0.18); }
+.setupInput::placeholder { color: rgba(255,255,255,0.25); font-size: 1.1rem; font-weight: 400; }
+.setupBtn {
+  width: 100%; padding: 0.9rem;
+  background: linear-gradient(135deg,#7c3aed,#ec4899); color: #fff; border: none;
+  border-radius: 14px; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.45);
+}
+.setupBtn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.6); }
+.setupBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+.lockedBadge {
+  padding: 0.875rem 1.5rem; background: rgba(16,185,129,0.15);
+  border: 1.5px solid rgba(16,185,129,0.35); border-radius: 12px;
+  color: #6ee7b7; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+  animation: scaleIn 0.25s ease; width: 100%; text-align: center;
+}
+.readyList { width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
+.readyRow  {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 0.875rem;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; font-size: 0.875rem; color: rgba(255,255,255,0.82); font-weight: 500;
+}
+.readyStatus { font-weight: 700; font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; }
+.readyBar    { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.readyFill   { height: 100%; background: linear-gradient(90deg,#7c3aed,#ec4899); border-radius: 3px; transition: width 0.4s ease; }
+.readyText   { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+
+/* ── DIFFICULTY CARDS ── */
+.diffGrid { width: 100%; display: flex; flex-direction: column; gap: 0.625rem; }
+.diffCard {
+  display: flex; align-items: center; gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 14px; cursor: pointer;
+  transition: all 0.18s ease; text-align: left;
+  font-family: 'Plus Jakarta Sans', sans-serif; width: 100%;
+}
+.diffCard:hover {
+  border-color: var(--diff-color);
+  background: rgba(255,255,255,0.11);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.diffSelected {
+  border-color: var(--diff-color) !important;
+  background: rgba(255,255,255,0.1) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--diff-color) 18%, transparent) !important;
+}
+.diffCardDisabled {
+  display: flex; align-items: center; gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.04);
+  border: 2px solid rgba(255,255,255,0.08);
+  border-radius: 14px; opacity: 0.55; width: 100%;
+}
+.diffIcon  { font-size: 1.5rem; flex-shrink: 0; }
+.diffLabel { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 700; color: #fff; }
+.diffDesc  { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* ── BOTTOM BAR ── */
+.bottomBar {
+  background: rgba(15,15,35,0.92); backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;
+  position: sticky; bottom: 0;
+}
+.guessFormLabel { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; }
+.guessForm  { display: flex; flex-direction: column; gap: 0.5rem; }
+.guessRow   { display: flex; gap: 0.625rem; }
+.guessInput {
+  flex: 1; padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.09); border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 12px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 600; color: #fff; outline: none; transition: all 0.2s;
+  -moz-appearance: textfield;
+}
+.guessInput::-webkit-inner-spin-button, .guessInput::-webkit-outer-spin-button { -webkit-appearance: none; }
+.guessInput:focus { border-color: #a78bfa; background: rgba(124,58,237,0.15); box-shadow: 0 0 0 3px rgba(124,58,237,0.18); }
+.guessInput::placeholder { color: rgba(255,255,255,0.3); font-size: 0.875rem; font-weight: 400; }
+.disabledInput { background: rgba(255,255,255,0.05) !important; color: rgba(255,255,255,0.25) !important; cursor: not-allowed; }
+.submitBtn {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg,#7c3aed,#ec4899); color: #fff; border: none;
+  border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+  font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.4);
+}
+.submitBtn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(124,58,237,0.6); }
+.disabledBtn { background: rgba(255,255,255,0.12) !important; box-shadow: none !important; cursor: not-allowed !important; }
+
+/* Emoji bar */
+.emojiBar { display: flex; gap: 0.5rem; justify-content: center; }
+.emojiBtn {
+  width: 44px; height: 44px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.emojiBtn:hover { background: rgba(124,58,237,0.25); border-color: #a78bfa; transform: scale(1.15); }
+.emojiBtn:active { transform: scale(0.95); }
+
+/* ── LEAVE ── */
+.leaveBtn {
+  width: calc(100% - 2.5rem); margin: 0 1.25rem 1.25rem;
+  padding: 0.875rem; background: rgba(239,68,68,0.12); border: 1.5px solid rgba(239,68,68,0.25);
+  border-radius: 14px; color: #fca5a5; font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.leaveBtn:hover { background: rgba(239,68,68,0.22); border-color: rgba(239,68,68,0.5); color: #fff; }
+
+/* Guess target chip */
+.guessingTarget {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.08); padding: 3px 10px; border-radius: 999px;
+  text-align: center; border: 1px solid rgba(255,255,255,0.1);
+}
+.guessingTargetName { color: #c4b5fd; font-weight: 800; }
+
+/* ── TYPING INDICATOR ── */
+.typingIndicator {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(109,40,217,0.18);
+  border: 1.5px solid rgba(109,40,217,0.35);
+  border-radius: 99px; animation: indicatorIn 0.2s ease; width: fit-content;
+}
+@keyframes indicatorIn { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
+.typingName { font-size: 0.72rem; font-weight: 800; color: #c4b5fd; font-family: 'Space Grotesk', sans-serif; white-space: nowrap; }
+.typingLabel { font-size: 0.68rem; font-weight: 700; color: rgba(196,181,253,0.65); font-family: 'Space Grotesk', sans-serif; }
+.typingDigits { display: flex; align-items: center; gap: 4px; }
+.typingDigitDot { width: 8px; height: 8px; border-radius: 50%; background: #a78bfa; box-shadow: 0 0 5px rgba(167,139,250,0.5); animation: dotFill 0.2s ease; }
+.typingDigitCount { font-size: 0.68rem; font-weight: 700; color: rgba(196,181,253,0.7); font-family: 'Space Grotesk', sans-serif; margin-left: 2px; }
+@keyframes dotFill { 0%{transform:scale(0.7)} 60%{transform:scale(1.25)} 100%{transform:scale(1)} }
+
+/* ── GUESS CHIP FLASH ── */
+.guessChipNew { animation: chipFlash 0.6s ease; }
+@keyframes chipFlash {
+  0%   { transform:scale(1); box-shadow:none; }
+  30%  { transform:scale(1.05); box-shadow:0 0 0 4px rgba(196,181,253,0.35); }
+  100% { transform:scale(1); box-shadow:none; }
+}
+@keyframes chipIn { from{opacity:0;transform:translateY(-6px) scale(0.97)} to{opacity:1;transform:none} }
+
+/* ── SHAKE ── */
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.shake { animation: shake 0.4s ease; }
+
+/* ── MOBILE ── */
+@media (max-width: 640px) { .cardsRow { flex-direction: column; } }
+@supports (min-height: 100dvh) { .page { min-height: 100dvh; } }

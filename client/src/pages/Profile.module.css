@@ -1,0 +1,77 @@
+
+/* Dark animated background matching Landing/Lobby */
+.page::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(135deg, #05010f 0%, #0d0221 18%, #130536 32%, #1e0a52 45%, #2d1b69 56%, #0e1a5e 70%, #05010f 100%);
+  background-size: 300% 300%;
+  animation: profGrad 14s ease infinite;
+}
+@keyframes profGrad {
+  0%   { background-position: 0%   50%; }
+  33%  { background-position: 100% 20%; }
+  66%  { background-position: 50%  100%; }
+  100% { background-position: 0%   50%; }
+}
+.page::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 45% at 8% 12%, rgba(139,92,246,0.35) 0%, transparent 52%),
+    radial-gradient(ellipse 50% 60% at 92% 88%, rgba(236,72,153,0.28) 0%, transparent 52%);
+}
+.page { min-height: 100vh; background: #05010f; padding: 2rem; }
+.layout { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; position: relative; z-index: 1; }
+.back { background: none; border: none; color: rgba(255,255,255,0.45); font-size: 0.85rem; cursor: pointer; padding: 0; transition: var(--transition); align-self: flex-start; font-family: var(--font-body); font-weight: 500; }
+.back:hover { color: #c4b5fd; }
+.profileCard {
+  display: flex; align-items: center; gap: 1.25rem;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(108,99,255,0.25);
+  border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  animation: fadeIn 0.35s ease; position: relative; overflow: hidden;
+}
+.profileCard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad-brand);
+}
+.avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; flex-shrink: 0; }
+.profileInfo { flex: 1; }
+.username { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: rgba(255,255,255,0.95); margin: 0; }
+.email { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin: 2px 0 0; }
+.joined { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.logoutBtn { padding: 0.6rem 1.1rem; background: transparent; border: 1.5px solid rgba(239,68,68,0.3); border-radius: var(--radius); color: #fca5a5; font-size: 0.8rem; cursor: pointer; transition: var(--transition); font-family: var(--font-body); white-space: nowrap; }
+.logoutBtn:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.5); }
+.statsGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; animation: slideUp 0.35s 0.08s ease both; }
+.statCard { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-lg); padding: 1rem; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.statNum { display: block; font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; background: var(--grad-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.statLabel { display: block; font-size: 0.68rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; font-weight: 600; }
+.section { animation: slideUp 0.35s 0.14s ease both; }
+.sectionTitle { font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 0.75rem; }
+.gameStats { display: flex; flex-direction: column; gap: 0.625rem; }
+.gameStatCard { display: flex; align-items: center; gap: 1rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.gameIcon { font-size: 1.4rem; flex-shrink: 0; }
+.gameStatInfo { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.gameStatName { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.gameStatSub { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+.winBar { width: 80px; height: 5px; background: var(--bg-3); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+.winBarFill { height: 100%; background: var(--brand); border-radius: 3px; transition: width 0.5s ease; }
+@media (max-width: 560px) { .statsGrid { grid-template-columns: repeat(2, 1fr); } .profileCard { flex-wrap: wrap; } .logoutBtn { width: 100%; text-align: center; } }
+
+.sectionTitle {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--text); margin: 0;
+}
+.gameStatCard {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.gameStatCard:hover { border-color: rgba(196,181,253,0.4); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.gameIcon { font-size: 1.5rem; }
+.gameStatInfo { flex: 1; }
+.gameStatName { display: block; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.92); }
+.gameStatSub  { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.winBar { width: 80px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.winBarFill { height: 100%; background: var(--grad-brand); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+.gameStats { display: flex; flex-direction: column; gap: 0.625rem; }
+.section { display: flex; flex-direction: column; gap: 0.875rem; }

@@ -1,0 +1,106 @@
+/* ── Container — top-right stack ── */
+.container {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  pointer-events: none;
+  max-width: 360px;
+  width: calc(100vw - 2.5rem);
+}
+
+/* ── Toast base ── */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 14px;
+  border: 1px solid;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: all;
+  position: relative;
+  overflow: hidden;
+  animation: toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)    scale(1);   }
+}
+
+/* ── Variants ── */
+.success { background: rgba(240,255,244,0.95); border-color: rgba(16,185,129,0.25); }
+.error   { background: rgba(255,245,245,0.95); border-color: rgba(239,68,68,0.25);  }
+.warning { background: rgba(255,251,235,0.95); border-color: rgba(245,158,11,0.25); }
+.info    { background: rgba(238,240,255,0.95); border-color: rgba(108,99,255,0.25); }
+
+.icon { flex-shrink: 0; display: flex; align-items: center; }
+
+.message {
+  flex: 1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #111827;
+}
+
+.close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 6px;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+  width: auto;
+  margin: 0;
+}
+.close:hover { color: #374151; background: rgba(0,0,0,0.05); }
+
+/* ── Progress bar ── */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0,0,0,0.06);
+}
+
+.progressFill {
+  height: 100%;
+  width: 100%;
+  border-radius: 0 0 14px 14px;
+}
+
+.fill_success { background: #10B981; }
+.fill_error   { background: #EF4444; }
+.fill_warning { background: #F59E0B; }
+.fill_info    { background: #6C63FF; }
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .container {
+    top: auto;
+    bottom: 1.25rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    max-width: none;
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(100%) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+}

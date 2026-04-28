@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --brand:       #6C63FF;
+  --brand-dark:  #4F46D8;
+  --brand-light: #EEF0FF;
+  --brand2:      #FF6B9D;
+  --brand3:      #00D4FF;
+
+  --bg:      #F7F8FC;
+  --bg-2:    #FFFFFF;
+  --bg-3:    #F0F1F7;
+  --bg-4:    #E4E6F0;
+
+  --border:       rgba(0,0,0,0.07);
+  --border-hover: rgba(0,0,0,0.14);
+
+  --text:   #111827;
+  --text-2: #4B5563;
+  --text-3: #9CA3AF;
+
+  --red:          #EF4444;
+  --red-light:    #FEE2E2;
+  --green:        #10B981;
+  --green-light:  #D1FAE5;
+  --blue:         #3B82F6;
+  --blue-light:   #DBEAFE;
+  --orange:       #F59E0B;
+  --orange-light: #FEF3C7;
+
+
+  /* ── Dark theme variables (used by game pages) ── */
+  --dark-bg:        #05010f;
+  --dark-bg-2:      rgba(255,255,255,0.07);
+  --dark-bg-3:      rgba(255,255,255,0.04);
+  --dark-border:    rgba(255,255,255,0.1);
+  --dark-text:      rgba(255,255,255,0.92);
+  --dark-text-2:    rgba(255,255,255,0.55);
+  --dark-text-3:    rgba(255,255,255,0.35);
+  --dark-brand:     #c4b5fd;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+
+  --radius:    10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow:    0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --shadow-brand: 0 8px 32px rgba(108,99,255,0.25);
+
+  --transition: 0.18s cubic-bezier(0.4,0,0.2,1);
+
+  /* Gradient palette */
+  --grad-hero:   linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f64f59 100%);
+  --grad-brand:  linear-gradient(135deg, #6C63FF 0%, #a855f7 100%);
+  --grad-warm:   linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --grad-cool:   linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --grad-green:  linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --grad-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; scroll-behavior:smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+#root { min-height:100vh; }
+
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg-3); }
+::-webkit-scrollbar-thumb { background:var(--bg-4); border-radius:3px; }
+::selection { background:var(--brand-light); color:var(--brand-dark); }
+
+@keyframes fadeIn   { from{opacity:0;transform:translateY(8px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes slideUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes scaleIn  { from{opacity:0;transform:scale(0.95)}      to{opacity:1;transform:scale(1)} }
+@keyframes float    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes shimmer  { 0%{background-position:200% center} 100%{background-position:-200% center} }
+@keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:0.5} }
+@keyframes spin     { to{transform:rotate(360deg)} }
+@keyframes gradMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.animate-fade  { animation:fadeIn  0.4s ease both; }
+.animate-slide { animation:slideUp 0.4s ease both; }
+.animate-scale { animation:scaleIn 0.3s ease both; }
+
+/* ── Global game topbar (used by all 3 new games) ── */
+.gameTopbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 1.5rem; height:62px; position:sticky; top:0; z-index:10;
+  background:rgba(5,1,15,0.75); backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 1px 0 rgba(0,0,0,0.04);
+}
+.gameBackBtn {
+  background:none; border:none; color:#c4b5fd; font-size:0.85rem;
+  font-weight:700; cursor:pointer; font-family:var(--font-display); padding:0;
+  transition:var(--transition);
+}
+.gameBackBtn:hover { opacity:0.7; }
+.gameTitle { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:rgba(255,255,255,0.92); }
+.gameRoom  { font-size:0.78rem; color:rgba(255,255,255,0.55); }
+.gameRoom strong { color:#c4b5fd; font-weight:700; }
+
+/* ── Score float animation ── */
+@keyframes scoreFloat {
+  0%   { opacity:0; transform:translateY(0) scale(0.8); }
+  20%  { opacity:1; transform:translateY(-8px) scale(1.1); }
+  70%  { opacity:1; transform:translateY(-24px) scale(1); }
+  100% { opacity:0; transform:translateY(-40px) scale(0.9); }
+}
+.scoreFloat {
+  position: fixed;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #10B981;
+  z-index: 9999;
+  animation: scoreFloat 1.8s ease forwards;
+  text-shadow: 0 2px 8px rgba(16,185,129,0.4);
+}
+
+/* ── Page title indicator ── */
+.myTurnTitle { }  /* handled via JS */
+
+/* ── Touch optimisation (prevents 300ms delay on mobile) ── */
+button, [role="button"] { touch-action: manipulation; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Topbar right slot (room code + sound toggle) ── */
+.gameTopbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Taunt picker panel animation */
+@keyframes tauntPickerIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}

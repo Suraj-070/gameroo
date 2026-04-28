@@ -1,0 +1,93 @@
+.page { min-height:100vh; background:#F0F1F7; display:flex; flex-direction:column; }
+.center { flex:1; max-width:600px; width:100%; margin:0 auto; padding:1.5rem 1rem 5rem; display:flex; flex-direction:column; gap:1.125rem; }
+
+.roleBanner { display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1.125rem; border-radius:var(--radius); font-size:0.875rem; font-weight:600; }
+.guesserBanner { background:rgba(108,99,255,0.15); color:var(--brand); border:1px solid rgba(108,99,255,0.2); }
+.setterBanner  { background:rgba(245,158,11,0.12); color:#92400E; border:1px solid rgba(245,158,11,0.2); }
+
+.hintCard { background:#fff; border:1px solid rgba(108,99,255,0.12); border-radius:var(--radius-xl); padding:1.75rem; text-align:center; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+.hintCard::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--grad-brand); }
+.hintLabel { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#9CA3AF; margin-bottom:0.5rem; }
+.hintText { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:#111827; margin-bottom:1.25rem; }
+.letterRow { display:flex; gap:6px; justify-content:center; margin-bottom:0.75rem; }
+.letterBox { width:36px; height:42px; border-bottom:3px solid var(--brand); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:#9CA3AF; }
+.hintMeta { font-size:0.75rem; color:#9CA3AF; }
+
+.guessBar { height:6px; background:var(--bg-4); border-radius:3px; overflow:hidden; }
+.guessBarFill { height:100%; background:linear-gradient(90deg,#10B981,#F59E0B,#EF4444); transition:width 0.4s ease; border-radius:3px; }
+
+.guessList { display:flex; flex-direction:column; gap:0.5rem; max-height:260px; overflow-y:auto; }
+.guessItem { display:flex; align-items:center; gap:0.75rem; padding:0.625rem 0.875rem; border-radius:var(--radius); border:1px solid #E5E7EB; background:#fff; animation:slideUp 0.2s ease; }
+.correctGuess { border-color:#10B981; background:#F0FFF4; }
+.wrongGuess   { border-color:var(--border); }
+.guessPlayer { font-size:0.72rem; font-weight:700; color:#9CA3AF; width:60px; flex-shrink:0; }
+.guessWord { flex:1; font-family:var(--font-display); font-weight:700; color:#111827; letter-spacing:0.05em; }
+.correctBadge { font-size:0.72rem; color:#10B981; font-weight:700; }
+
+.setterHint { text-align:center; padding:0.875rem; background:#FFFBEB; border:1px solid rgba(245,158,11,0.2); border-radius:var(--radius); font-size:0.875rem; color:#92400E; }
+.setterWaiting { text-align:center; color:#9CA3AF; font-size:0.875rem; padding:1rem; }
+.spinIcon { display:inline-block; animation:spin 1s linear infinite; }
+
+.guessForm { display:flex; gap:0.625rem; }
+.guessInput { flex:1; padding:0.8rem 1rem; background:var(--bg-3); border:1.5px solid #E5E7EB; border-radius:var(--radius); font-family:var(--font-display); font-size:1rem; font-weight:700; letter-spacing:0.08em; color:#111827; outline:none; transition:var(--transition); }
+.guessInput:focus { border-color:var(--brand); background:#fff; box-shadow:0 0 0 3px rgba(108,99,255,0.1); }
+.guessBtn { padding:0.8rem 1.25rem; background:var(--grad-brand); color:#fff; border:none; border-radius:var(--radius); font-family:var(--font-display); font-size:0.9rem; font-weight:700; cursor:pointer; transition:var(--transition); white-space:nowrap; }
+.guessBtn:hover { transform:translateY(-1px); box-shadow:var(--shadow-brand); }
+
+.overWrap { flex:1; display:flex; align-items:center; justify-content:center; padding:2rem 1rem; }
+.overCard { background:#fff; border:1px solid rgba(108,99,255,0.12); border-radius:var(--radius-xl); padding:2.5rem 2rem; max-width:400px; width:100%; text-align:center; box-shadow:var(--shadow-lg); display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.overEmoji { font-size:3rem; }
+.overTitle { font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:#111827; }
+.overSub   { font-size:0.82rem; color:#9CA3AF; }
+.overSub2  { font-size:0.72rem; color:#9CA3AF; }
+.wordReveal { display:flex; flex-direction:column; align-items:center; gap:0.75rem; }
+.wordLetters { display:flex; gap:6px; }
+.wordLetter { width:44px; height:52px; background:var(--grad-brand); color:#fff; border-radius:var(--radius); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.4rem; font-weight:700; animation:popIn 0.3s ease both; }
+
+.leaveBtn { position:fixed; bottom:1.25rem; right:1.25rem; padding:0.6rem 1rem; background:#fff; border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius); color:#EF4444; font-size:0.8rem; cursor:pointer; font-family:var(--font-body); font-weight:600; box-shadow:var(--shadow); transition:var(--transition); }
+.leaveBtn:hover { background:var(--red-light); }
+
+@keyframes popIn { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+/* ── Timer badge (shown when server provides timeLimitSeconds) ── */
+.timerBadge {
+  display: inline-flex; align-items: center; gap: 3px;
+  margin-left: 0.5rem; font-size: 0.75rem; font-weight: 700;
+  color: #6C63FF; background: rgba(108,99,255,0.12);
+  padding: 1px 8px; border-radius: 999px; border: 1px solid rgba(108,99,255,0.2);
+  font-family: var(--font-display);
+}
+.timerUrgent { color: #EF4444; background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.25); animation: pulse 0.6s ease infinite; }
+
+/* ── Guess list label ── */
+.guessListWrap { width: 100%; }
+.guessListLabel { font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+
+/* ── Setter word reveal — CSS class approach (fix for broken inline style) ── */
+.setterHint { cursor: pointer; user-select: none; }
+.wordVisible {
+  color: #c4b5fd; font-weight: 700; letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.wordHidden {
+  background: rgba(108,99,255,0.6); color: transparent; border-radius: 4px;
+  padding: 0 6px; user-select: none; transition: all 0.2s;
+  filter: blur(2px);
+}
+.revealHint { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-left: 6px; }
+
+/* Round progress banner */
+.roundBanner { text-align:center; font-size:0.8rem; font-weight:700; color:rgba(255,255,255,0.5); padding:0.4rem 1rem; background:rgba(255,255,255,0.05); border-radius:10px; margin-bottom:0.5rem; font-family:'Space Grotesk',sans-serif; }
+.roundSwap   { color:#c4b5fd; }
+
+/* Extra hint form */
+.extraHintForm  { display:flex; gap:0.5rem; width:100%; margin-top:0.5rem; }
+.extraHintInput { flex:1; padding:0.6rem 0.875rem; background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.12); border-radius:10px; color:#fff; font-family:'Space Grotesk',sans-serif; font-size:0.85rem; outline:none; }
+.extraHintInput:focus { border-color:#c4b5fd; }
+.extraHintBtn   { padding:0.6rem 1rem; background:rgba(108,99,255,0.25); border:1.5px solid rgba(108,99,255,0.4); border-radius:10px; color:#c4b5fd; font-family:'Space Grotesk',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+.extraHintDisplay { width:100%; padding:0.625rem 0.875rem; background:rgba(251,191,36,0.1); border:1.5px solid rgba(251,191,36,0.25); border-radius:10px; font-size:0.82rem; color:#fbbf24; text-align:center; }
+
+/* Round results in over screen */
+.roundResult { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0.875rem; background:rgba(255,255,255,0.06); border-radius:10px; font-size:0.82rem; color:rgba(255,255,255,0.8); width:100%; }
+.roundSolved { color:#6ee7b7; font-weight:700; }
+.roundFailed { color:#fca5a5; font-weight:700; }

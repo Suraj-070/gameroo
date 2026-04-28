@@ -1,0 +1,10 @@
+.btn {
+  display:flex; align-items:center; justify-content:center; gap:0.5rem;
+  padding:0.75rem 1.5rem; border-radius:var(--radius); cursor:pointer;
+  font-family:var(--font-display); font-size:0.875rem; font-weight:700;
+  background:var(--bg-2); border:1.5px solid var(--border);
+  color:var(--text-2); transition:var(--transition);
+  box-shadow:var(--shadow-sm);
+}
+.btn:hover { border-color:var(--brand); color:var(--brand); background:var(--brand-light); transform:translateY(-1px); }
+.copied { border-color:#10B981; color:#10B981; background:#F0FFF4; }
